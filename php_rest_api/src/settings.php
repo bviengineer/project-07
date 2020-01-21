@@ -14,7 +14,7 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
         ],
 
-        // API
+        // API settings
         'api' => [
             'version' => 'v1',
             'base_url' => 'http://localhost:8888',
