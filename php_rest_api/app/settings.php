@@ -20,6 +20,6 @@ return function (ContainerBuilder $containerBuilder) {
     //API
     $api = [
         'version' => 'v1',
-        'base_URL' => 'localhost:8888'
+        'base_URL' => 'http://localhost:8888'
     ];
 };
