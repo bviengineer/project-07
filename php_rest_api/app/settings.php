@@ -22,4 +22,10 @@ return function (ContainerBuilder $containerBuilder) {
         'version' => 'v1',
         'base_URL' => 'http://localhost:8888'
     ];
+
+    // DB Settings
+    $db = [
+        'dsn' => "sqlite",
+        'database' => __DIR__ . '/todo.db'
+    ];
 };
