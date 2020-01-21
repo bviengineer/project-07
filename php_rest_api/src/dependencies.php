@@ -17,3 +17,9 @@ $container['logger'] = function ($c) {
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], Monolog\Logger::DEBUG));
     return $logger;
 };
+
+// API container
+$container['api'] = function ($c) {
+    $api = $c->get('settings')['api'];
+    return $api;
+};
