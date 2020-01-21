@@ -19,5 +19,11 @@ return [
             'version' => 'v1',
             'base_url' => 'http://localhost:8888',
         ],
+
+        // Database settings
+        'db' => [
+            'dsn' => 'sqlite',
+            'database' => __DIR__ . 'src/todo.db',
+        ],
     ],
 ];
