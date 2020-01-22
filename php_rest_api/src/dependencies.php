@@ -32,3 +32,8 @@ $container['db'] = function ($c) {
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $pdo;
 };
+
+// Todo model container 
+$container['todos'] = function($c) {
+    return new App\Model\Todo($c->get('db'));
+};
