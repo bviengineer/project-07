@@ -34,6 +34,6 @@ $container['db'] = function ($c) {
 };
 
 // Todo model container 
-$container['todos'] = function($c) {
+$container['todo'] = function($c) {
     return new App\Model\Todo($c->get('db'));
 };
