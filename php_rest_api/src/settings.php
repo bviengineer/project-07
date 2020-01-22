@@ -23,7 +23,7 @@ return [
         // Database settings
         'db' => [
             'dsn' => 'sqlite',
-            'database' => __DIR__ . 'src/todo.db',
+            'database' => __DIR__ . '/todo.db',
         ],
     ],
 ];
