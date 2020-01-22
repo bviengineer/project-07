@@ -13,8 +13,8 @@ class Todo
     public function getTodos() 
     {
         $sqlStmt = 'SELECT * FROM tasks ORDER BY id';
-        $results = $this->db->prepare($sqlStmt);
-        $results->execute();
-        return $results->fetchAll();
+        $result = $this->db->prepare($sqlStmt);
+        $result->execute();
+        return $result->fetchAll();
     }
 }
