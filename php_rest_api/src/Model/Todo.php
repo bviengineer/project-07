@@ -9,7 +9,7 @@ class Todo
     {
         $this->db = $database;
     }
-
+    // Retrieves all Todos
     public function getTodos() 
     {
         $sqlStmt = 'SELECT * FROM tasks ORDER BY id';
@@ -17,6 +17,7 @@ class Todo
         $result->execute();
         return $result->fetchAll();
     }
+    // Retrieves a single Todo
     public function getTodo($todoId) 
     {
         $sqlStmt = 'SELECT * FROM tasks WHERE id = :id';
