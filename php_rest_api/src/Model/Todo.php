@@ -17,4 +17,12 @@ class Todo
         $result->execute();
         return $result->fetchAll();
     }
+    public function getTodo($todoId) 
+    {
+        $sqlStmt = 'SELECT * FROM tasks WHERE id = :id';
+        $result = $this->db->prepare($sqlStmt);
+        $result->bindParam(':id', $todoId, PDO::PARAM_INT);
+        $result->execute();
+        return $result->fetch();
+    }
 }
