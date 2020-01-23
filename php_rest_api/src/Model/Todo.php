@@ -27,13 +27,24 @@ class Todo
         return $result->fetch();
     }
     // Creates a Todo
-    public function createTodo($todoId) 
+    public function createTodo($todo) 
     {
         $sqlStmt = 'INSERT INTO tasks(task, status) VALUES(:task, :status)';
         $result = $this->db->prepare($sqlStmt);
-        $result->bindParam(':task', $todoId['task'], PDO::PARAM_STR);
-        $result->bindParam(':id', $todoId['status'], PDO::PARAM_INT);
+        $result->bindParam(':task', $todo['task'], PDO::PARAM_STR);
+        $result->bindParam(':id', $todo['status'], PDO::PARAM_INT);
         $result->execute();
         return $this-getTodo($this->db->lastInsertId());
+    }
+    // Update a Todo
+    public function updateTodo($todo) 
+    {
+        $sqlStmt = 'UPDATE tasks SET task = :task, status = :status WHERE id = :id';
+        $result = $this->db->prepare($sqlStmt);
+        $result->bindParam(':id', $todo['id'], PDO::PARAM_INT);
+        $result->bindParam(':task', $todo['task'], PDO::PARAM_STR);
+        $result->bindParam(':id', $todo['status'], PDO::PARAM_INT);
+        $result->execute();
+        return $this-getTodo($todo['id']);
     }
 }
