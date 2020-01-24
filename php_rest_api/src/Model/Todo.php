@@ -22,7 +22,7 @@ class Todo
     {
         $sqlStmt = 'SELECT * FROM tasks WHERE id = :id';
         $result = $this->db->prepare($sqlStmt);
-        $result->bindParam(':id', $todoId);
+        $result->bindParam(':id', $todoId, \PDO::PARAM_INT);
         $result->execute();
         return $result->fetch();
     }
@@ -31,8 +31,8 @@ class Todo
     {
         $sqlStmt = 'INSERT INTO tasks(task, status) VALUES(:task, :status)';
         $result = $this->db->prepare($sqlStmt);
-        $result->bindParam(':task', $todo['task']);
-        $result->bindParam(':id', $todo['status'],);
+        $result->bindParam(':task', $todo['task'], \PDO::PARAM_STR);
+        $result->bindParam(':id', $todo['status'], \PDO::PARAM_INT);
         $result->execute();
         return $this->getTodo($this->db->lastInsertId());
     }
@@ -41,9 +41,9 @@ class Todo
     {
         $sqlStmt = 'UPDATE tasks SET task = :task, status = :status WHERE id = :id';
         $result = $this->db->prepare($sqlStmt);
-        $result->bindParam(':id', $todo['id']);
-        $result->bindParam(':task', $todo['task']);
-        $result->bindParam(':id', $todo['status']);
+        $result->bindParam(':id', $todo['id'], \PDO::PARAM_INT);
+        $result->bindParam(':task', $todo['task'], \PDO::PARAM_STR);
+        $result->bindParam(':id', $todo['status'], \PDO::PARAM_INT);
         $result->execute();
         return $this->getTodo($todo['id']);
     }
@@ -52,7 +52,7 @@ class Todo
     {
         $sqlStmt = 'DELETE FROM tasks WHERE id = :id';
         $result = $this->db->prepare($sqlStmt);
-        $result->bindParam(':id', $todoId);
+        $result->bindParam(':id', $todoId, \PDO::PARAM_INT);
         $result->execute();
         return ['message' => 'That item has been removed from the list'];
     }
