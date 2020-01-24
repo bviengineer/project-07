@@ -3,14 +3,20 @@
 
 $app->get('/', function ($request, $response, $args) {
     $endpoints = [
-        'list of todos' => '/api/v1/todos',
-        'single todo' => '/api/v1/{todoId}',
-        'todos by status' => '/api/v1/todos/status',
-        'single status' => '/api/v1/todos/status_id',
-        'help' => '/'
+        'list of todos' => $this->api['api_url'].'/todos',
+        'single todo' => $this->api['api_url'].'/todos/{todoId}',
+        'todos by status' => $this->api['api_url'].'/todos/status',
+        'single status' => $this->api['api_url'].'/todos/status_id',
+        'help' => $this->api['base_url'].'/'
     ];
 
-    $result = $this->todo->getTodos(); // here todo is referring to the container?
+    $result = [
+        'endpoints' => $endpoints,
+        'version' => $this->api['version'],
+        'datetime' => date('c')
+    ];
+
+    //$result = $this->todo->getTodos(); // here todo is referring to the container?
     return $response->withJson($result, 200, JSON_PRETTY_PRINT);
 });
 // [GET] /api/v1/todos
