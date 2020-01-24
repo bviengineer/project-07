@@ -1,17 +1,18 @@
 <?php
 // Routes
 
-// $app->get('/', function ($request, $response, $args) {
-// // $app->get('/[{name}]', function ($request, $response, $args) {
-//     // Sample log message
-//     // $this->logger->info("Slim-Skeleton '/' route");
+$app->get('/', function ($request, $response, $args) {
+    $endpoints = [
+        'list of todos' => '/api/v1/todos',
+        'single todo' => '/api/v1/{todoId}',
+        'todos by status' => '/api/v1/todos/status',
+        'single status' => '/api/v1/todos/status_id',
+        'help' => '/'
+    ];
 
-//     // Render index view
-//     // return $this->renderer->render($response, 'index.phtml', $args);
-
-//     $result = $this->todo->getTodos(); // here todo is referring to the container?
-//     return $response->withJson($result, 200, JSON_PRETTY_PRINT);
-// });
+    $result = $this->todo->getTodos(); // here todo is referring to the container?
+    return $response->withJson($result, 200, JSON_PRETTY_PRINT);
+});
 // [GET] /api/v1/todos
 // [POST] /api/v1/todos
 // [GET] /api/v1/todos/{id}
