@@ -34,10 +34,17 @@ $app->group('/api/v1/todos', function() use ($app){
         //var_dump($result);
         return $response->withJson($result, 201, JSON_PRETTY_PRINT);
     });
+    // Update a todo
+    $app->put('', function ($request, $response, $args) {    
+        $data = $request->getParsedBody();
+        $data['todoId'] = $args['todoId'];
+        $result = $this->todo->updateTodo($data);
+        return $response->withJson($result, 201, JSON_PRETTY_PRINT);
+    });
 });
 
 // [GET] /api/v1/todos > DONE
-// [POST] /api/v1/todos
+// [POST] /api/v1/todos > DONE
 // [GET] /api/v1/todos/{id} DONE
 // [PUT] /api/v1/todos/{id}
 // [DELETE] /api/v1/todos/{id}
