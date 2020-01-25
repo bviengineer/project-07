@@ -6,7 +6,7 @@ $app->get('/', function ($request, $response, $args) {
         'list all todos' => $this->api['api_url'].'/todos',
         'list a single todo' => $this->api['api_url'].'/todos/{todoId}',
         'add a todo' => $this->api['api_url'].'/todos', // needed
-        'update a todo' => $this->api['api_url'].'/todos/todoId',
+        'update a todo' => $this->api['api_url'].'/todos/{todoId}',
         'help' => $this->api['base_url'].'/'
     ];
     $result = [
@@ -35,9 +35,9 @@ $app->group('/api/v1/todos', function() use ($app){
         return $response->withJson($result, 201, JSON_PRETTY_PRINT);
     });
     // Update a todo
-    $app->put('', function ($request, $response, $args) {    
+    $app->put('/{todoId}', function ($request, $response, $args) {    
         $data = $request->getParsedBody();
-        $data['todoId'] = $args['todoId'];
+        $data['id'] = $args['todoId'];
         $result = $this->todo->updateTodo($data);
         return $response->withJson($result, 201, JSON_PRETTY_PRINT);
     });
