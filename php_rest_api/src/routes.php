@@ -41,6 +41,11 @@ $app->group('/api/v1/todos', function() use ($app){
         $result = $this->todo->updateTodo($data);
         return $response->withJson($result, 201, JSON_PRETTY_PRINT);
     });
+    // Delete a todo
+    $app->delete('/todoId', function ($request, $response, $args) {    
+        $result = $this->todo->deleteTodo($args['todoId']);
+        return $response->withJson($result, 200, JSON_PRETTY_PRINT);
+    });
 });
 
 // [GET] /api/v1/todos > DONE
