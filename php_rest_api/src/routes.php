@@ -23,7 +23,7 @@ $app->group('/api/v1/todos', function() use ($app){
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
     });
     // List a specific todo
-    $app->get('/todoId', function ($request, $response, $args) {    
+    $app->get('/{todoId}', function ($request, $response, $args) {    
         $result = $this->todo->getTodo($args['todoId']);
         //var_dump($result);
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
