@@ -43,7 +43,7 @@ class Todo
         $result = $this->db->prepare($sqlStmt);
         $result->bindParam(':id', $todo['id'], \PDO::PARAM_INT);
         $result->bindParam(':task', $todo['task'], \PDO::PARAM_STR);
-        $result->bindParam(':id', $todo['status'], \PDO::PARAM_INT);
+        $result->bindParam(':status', $todo['status'], \PDO::PARAM_INT);
         $result->execute();
         return $this->getTodo($todo['id']);
     }
