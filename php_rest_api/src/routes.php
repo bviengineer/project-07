@@ -5,8 +5,9 @@ $app->get('/', function ($request, $response, $args) {
     $endpoints = [
         'list all todos' => $this->api['api_url'].'/todos',
         'list a single todo' => $this->api['api_url'].'/todos/{todoId}',
-        'add a todo' => $this->api['api_url'].'/todos', // needed
+        'add a todo' => $this->api['api_url'].'/todos/{todoId}',
         'update a todo' => $this->api['api_url'].'/todos/{todoId}',
+        'delete a todo' => $this->api['api_url'].'/todos/{todoId}',
         'help' => $this->api['base_url'].'/'
     ];
     $result = [
@@ -25,13 +26,11 @@ $app->group('/api/v1/todos', function() use ($app){
     // List a specific todo
     $app->get('/{todoId}', function ($request, $response, $args) {    
         $result = $this->todo->getTodo($args['todoId']);
-        //var_dump($result);
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
     });
     // Create a todo
     $app->post('', function ($request, $response, $args) {    
         $result = $this->todo->createTodo($request->getParsedBody());
-        //var_dump($result);
         return $response->withJson($result, 201, JSON_PRETTY_PRINT);
     });
     // Update a todo
