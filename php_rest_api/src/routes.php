@@ -47,9 +47,3 @@ $app->group('/api/v1/todos', function() use ($app){
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
     });
 });
-
-// [GET] /api/v1/todos > DONE
-// [POST] /api/v1/todos > DONE
-// [GET] /api/v1/todos/{id} DONE
-// [PUT] /api/v1/todos/{id}
-// [DELETE] /api/v1/todos/{id}
