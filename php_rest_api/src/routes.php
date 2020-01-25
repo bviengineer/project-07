@@ -8,6 +8,12 @@ $app->get('/', function ($request, $response, $args) {
         'add a todo' => $this->api['api_url'].'/todos/{todoId}',
         'update a todo' => $this->api['api_url'].'/todos/{todoId}',
         'delete a todo' => $this->api['api_url'].'/todos/{todoId}',
+        'list all subtasks' => $this->api['api_url'].'/todos/{task_id}/subtasks',
+        
+        'list all subtasks' => $this->api['api_url']. '/todos/{task_id}/subtasks',
+        'list a single subtask' => $this->api['api_url']. '/todos/{task_id}/subtasks/{subtask_id}',
+        'update a subtask' => $this->api['api_url']. '/todos/{task_id}/subtasks/{subtask_id}',
+        'delete a subtask' => $this->api['api_url']. '/todos/{task_id}/subtasks/{subtask_id}',
         'help' => $this->api['base_url'].'/'
     ];
     $result = [
