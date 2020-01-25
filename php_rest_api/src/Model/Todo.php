@@ -32,7 +32,7 @@ class Todo
         $sqlStmt = 'INSERT INTO tasks(task, status) VALUES(:task, :status)';
         $result = $this->db->prepare($sqlStmt);
         $result->bindParam(':task', $todo['task'], \PDO::PARAM_STR);
-        $result->bindParam(':id', $todo['status'], \PDO::PARAM_INT);
+        $result->bindParam(':status', $todo['status'], \PDO::PARAM_INT);
         $result->execute();
         return $this->getTodo($this->db->lastInsertId());
     }
