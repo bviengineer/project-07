@@ -77,6 +77,7 @@ $app->group('/api/v1/todos', function() use ($app){
         });
         // Update a subtask
         $app->put('/{subtask_id}', function ($request, $response, $args) {    
+            // NOTE TO SELF: likewise, b/c task_id and a subtask id are needed in order to add a subtask, why am I needing to add the subtask id & task_id in order for it to work?
             $data = $request->getParsedBody();
             $data['id'] = $args['subtask_id'];
             $result = $this->subtasks->updateSubtask($data);
@@ -89,11 +90,3 @@ $app->group('/api/v1/todos', function() use ($app){
         });
     });
 });
-
-// [GET] /api/v1/todos/{task_id}/subtasks > DONE
-// [POST] /api/v1/todos/{task_id}/subtasks > DONE-ish must revisit
-// [GET] /api/v1/todos/{task_id}/subtasks/{subtask_id} > DONE
-    // can a todo have more than 1 subtask?
-    // mean to be {task_id}/subtasks/{id}?
-// [PUT] /api/v1/todos/{task_id}/subtasks/{subtask_id} > ATTEMPTED-not working
-// [DELETE] /api/v1/todos/{task_id}/subtasks/{subtask_id} > DONE
