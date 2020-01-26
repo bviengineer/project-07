@@ -64,8 +64,14 @@ $app->group('/api/v1/todos', function() use ($app){
         // Lists all subtasks for a todo
         $app->get('', function ($request, $response, $args) {    
             $result = $this->subtasks->getSubtasks($args['task_id']);
-            var_dump($result);
-            //return $response->withJson($result, 200, JSON_PRETTY_PRINT);
+            // var_dump($result);
+            return $response->withJson($result, 200, JSON_PRETTY_PRINT);
+        });
+        // Get a subtask for a todo by the subtask id
+        $app->get('', function ($request, $response, $args) {    
+            $result = $this->subtasks->getSubtasks($args['task_id']);
+            // var_dump($result);
+            return $response->withJson($result, 200, JSON_PRETTY_PRINT);
         });
     });
 });
