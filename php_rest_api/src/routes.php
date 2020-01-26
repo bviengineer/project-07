@@ -52,17 +52,26 @@ $app->group('/api/v1/todos', function() use ($app){
         $result = $this->todo->deleteTodo($args['todoId']);
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
     });
-    $app-group('/{task_id}/subtasks', function () use ($app){
+    // Subtasks app group
+    $app->group('/{task_id}/subtasks', function () use ($app){
         $app->post('', function ($request, $response, $args) {    
+           // $data = $request->getParsedBody();
+            //$data['task_id'] = $args['task_id'];
             $result = $this->subtasks->createSubtask($request->getParsedBody());
             //var_dump($result);
             return $response->withJson($result, 201, JSON_PRETTY_PRINT);
         });
+        // Lists all subtasks for a todo
+        $app->get('/{task_id}/subtasks', function ($request, $response, $args) {    
+            $result = $this->subtasks->getSubtasks($args['task_id']);
+            var_dump($result);
+            //return $response->withJson($result, 200, JSON_PRETTY_PRINT);
+        });
     });
 });
 
-// [GET] /api/v1/todos/{task_id}/subtasks
-// [POST] /api/v1/todos/{task_id}/subtasks
+// [GET] /api/v1/todos/{task_id}/subtasks > DONE
+// [POST] /api/v1/todos/{task_id}/subtasks > DONE
 // [GET] /api/v1/todos/{task_id}/subtasks/{subtask_id}
 // [PUT] /api/v1/todos/{task_id}/subtasks/{subtask_id}
 // [DELETE] /api/v1/todos/{task_id}/subtasks/{subtask_id}
