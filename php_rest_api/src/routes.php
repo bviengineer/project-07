@@ -52,4 +52,17 @@ $app->group('/api/v1/todos', function() use ($app){
         $result = $this->todo->deleteTodo($args['todoId']);
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
     });
+    $app-group('/{task_id}/subtasks', function () use ($app){
+        $app->post('', function ($request, $response, $args) {    
+            $result = $this->subtasks->createSubtask($request->getParsedBody());
+            //var_dump($result);
+            return $response->withJson($result, 201, JSON_PRETTY_PRINT);
+        });
+    });
 });
+
+// [GET] /api/v1/todos/{task_id}/subtasks
+// [POST] /api/v1/todos/{task_id}/subtasks
+// [GET] /api/v1/todos/{task_id}/subtasks/{subtask_id}
+// [PUT] /api/v1/todos/{task_id}/subtasks/{subtask_id}
+// [DELETE] /api/v1/todos/{task_id}/subtasks/{subtask_id}
