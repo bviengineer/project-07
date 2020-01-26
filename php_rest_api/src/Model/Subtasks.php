@@ -48,14 +48,15 @@ class Subtasks
         $result->execute();
         return $this->getSubtaskById($this->db->lastInsertId());
     }
-    // Update a subtask based on subtask id
+    // Update a subtask based on the subtask's id
     public function updateSubtask($subtask) 
     {
-        $sqlStmt = 'UPDATE subtasks SET name = :name, status = :status, WHERE id = :id';
+        $sqlStmt = 'UPDATE subtasks SET name = :name, status = :status, task_id = :taskId WHERE id = :id';
         $result = $this->db->prepare($sqlStmt);
         $result->bindParam(':id', $subtask['id'], \PDO::PARAM_INT);
         $result->bindParam(':name', $subtask['name'], \PDO::PARAM_STR);
         $result->bindParam(':status', $subtask['status'], \PDO::PARAM_INT);
+        $result->bindParam(':taskId', $subtask['task_id'], \PDO::PARAM_INT);
         $result->execute();
         return $this->getSubtaskById($subtask['id']);
     }
