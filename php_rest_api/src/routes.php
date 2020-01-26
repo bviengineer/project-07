@@ -3,18 +3,22 @@
 
 $app->get('/', function ($request, $response, $args) {
     $endpoints = [
-        'list all todos' => $this->api['api_url'].'/todos',
-        'list a single todo' => $this->api['api_url'].'/todos/{todoId}',
+        // Todo endponits
+        'view all todos' => $this->api['api_url'].'/todos',
+        'view a single todo' => $this->api['api_url'].'/todos/{todoId}',
         'add a todo' => $this->api['api_url'].'/todos/{todoId}',
         'update a todo' => $this->api['api_url'].'/todos/{todoId}',
         'delete a todo' => $this->api['api_url'].'/todos/{todoId}',
-        'list all subtasks' => $this->api['api_url'].'/todos/{task_id}/subtasks',
         
         // Subtasks endpoints 
-        'list all subtasks' => $this->api['api_url']. '/todos/{task_id}/subtasks',
-        'list a single subtask' => $this->api['api_url']. '/todos/{task_id}/subtasks/{subtask_id}',
+        'view all subtasks for a given todo' => $this->api['api_url']. '/todos/{task_id}/subtasks',
+        'add a subtask for a given todo' => $this->api['api_url']. '/todos/{task_id}/subtasks',
+        'view a single subtask for a given todo' => $this->api['api_url']. '/todos/{task_id}/subtasks/{subtask_id}',
         'update a subtask' => $this->api['api_url']. '/todos/{task_id}/subtasks/{subtask_id}',
         'delete a subtask' => $this->api['api_url']. '/todos/{task_id}/subtasks/{subtask_id}',
+
+
+        // Endpoints menu
         'help' => $this->api['base_url'].'/'
     ];
     $result = [
@@ -52,25 +56,23 @@ $app->group('/api/v1/todos', function() use ($app){
         $result = $this->todo->deleteTodo($args['todoId']);
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
     });
-    // Subtasks app group
+
+    // Subtasks route group
     $app->group('/{task_id}/subtasks', function () use ($app){
+        // Add a subtask
         $app->post('', function ($request, $response, $args) {    
-           // $data = $request->getParsedBody();
-            //$data['task_id'] = $args['task_id'];
             $result = $this->subtasks->createSubtask($request->getParsedBody());
-            //var_dump($result);
+            //NOTE TO SELF: why am I needing to add the subtask id & task_id in order for it to work?
             return $response->withJson($result, 201, JSON_PRETTY_PRINT);
         });
-        // Lists all subtasks for a todo
+        // View all subtasks for a given todo
         $app->get('', function ($request, $response, $args) {    
             $result = $this->subtasks->getSubtasks($args['task_id']);
-            // var_dump($result);
             return $response->withJson($result, 200, JSON_PRETTY_PRINT);
         });
-        // Get a subtask for a todo by the subtask id
+        // View a single subtask for a todo by the subtask id
         $app->get('/{subtask_id}', function ($request, $response, $args) {    
             $result = $this->subtasks->getSubtaskById($args['subtask_id']);
-            // var_dump($result);
             return $response->withJson($result, 200, JSON_PRETTY_PRINT);
         });
         // Update a subtask
@@ -93,7 +95,9 @@ $app->group('/api/v1/todos', function() use ($app){
 });
 
 // [GET] /api/v1/todos/{task_id}/subtasks > DONE
-// [POST] /api/v1/todos/{task_id}/subtasks > DONE
+// [POST] /api/v1/todos/{task_id}/subtasks > DONE-ish must revisit
 // [GET] /api/v1/todos/{task_id}/subtasks/{subtask_id} > DONE
-// [PUT] /api/v1/todos/{task_id}/subtasks/{subtask_id}
+    // can a todo have more than 1 subtask?
+    // mean to be {task_id}/subtasks/{id}?
+// [PUT] /api/v1/todos/{task_id}/subtasks/{subtask_id} > ATTEMPTED-not working
 // [DELETE] /api/v1/todos/{task_id}/subtasks/{subtask_id} > DONE
