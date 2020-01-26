@@ -43,7 +43,7 @@ $app->group('/api/v1/todos', function() use ($app){
     // Update a todo
     $app->put('/{todoId}', function ($request, $response, $args) {    
         $data = $request->getParsedBody();
-        $data['id'] = $args['todoId'];
+        $data['id'] = $args['todoId']; //why?
         $result = $this->todo->updateTodo($data);
         return $response->withJson($result, 201, JSON_PRETTY_PRINT);
     });
@@ -68,9 +68,25 @@ $app->group('/api/v1/todos', function() use ($app){
             return $response->withJson($result, 200, JSON_PRETTY_PRINT);
         });
         // Get a subtask for a todo by the subtask id
-        $app->get('', function ($request, $response, $args) {    
-            $result = $this->subtasks->getSubtasks($args['task_id']);
+        $app->get('/{subtask_id}', function ($request, $response, $args) {    
+            $result = $this->subtasks->getSubtaskById($args['subtask_id']);
             // var_dump($result);
+            return $response->withJson($result, 200, JSON_PRETTY_PRINT);
+        });
+        // Update a subtask
+        $app->put('/{subtask_id}', function ($request, $response, $args) {    
+            $data = $request->getParsedBody();
+            $data['id'] = $args['subtask_id'];
+            $result = $this->subtasks->updateSubtask($data);
+            // var_dump($args['id']);
+            //var_dump($args['name']);
+            // var_dump($args['status']);
+            // var_dump($args['task_id']);
+            return $response->withJson($result, 201, JSON_PRETTY_PRINT);
+        });
+        // Delete a todo
+        $app->delete('/{subtask_id}', function ($request, $response, $args) {    
+            $result = $this->subtasks->deleteSubtask($args['subtask_id']);
             return $response->withJson($result, 200, JSON_PRETTY_PRINT);
         });
     });
@@ -78,6 +94,6 @@ $app->group('/api/v1/todos', function() use ($app){
 
 // [GET] /api/v1/todos/{task_id}/subtasks > DONE
 // [POST] /api/v1/todos/{task_id}/subtasks > DONE
-// [GET] /api/v1/todos/{task_id}/subtasks/{subtask_id}
+// [GET] /api/v1/todos/{task_id}/subtasks/{subtask_id} > DONE
 // [PUT] /api/v1/todos/{task_id}/subtasks/{subtask_id}
-// [DELETE] /api/v1/todos/{task_id}/subtasks/{subtask_id}
+// [DELETE] /api/v1/todos/{task_id}/subtasks/{subtask_id} > DONE
