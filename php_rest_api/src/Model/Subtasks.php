@@ -19,14 +19,14 @@ class Subtasks
         return $result->fetchAll();
     }
     // Retrieves a single subtask based on task_id which matched the todo id
-    public function getSubtask($taskId) 
-    {
-        $sqlStmt = 'SELECT * FROM subtasks WHERE task_id = :taskId';
-        $result = $this->db->prepare($sqlStmt);
-        $result->bindParam(':taskId', $taskId, \PDO::PARAM_INT);
-        $result->execute();
-        return $result->fetch();
-    }
+    // public function getSubtask($taskId) 
+    // {
+    //     $sqlStmt = 'SELECT * FROM subtasks WHERE task_id = :taskId';
+    //     $result = $this->db->prepare($sqlStmt);
+    //     $result->bindParam(':taskId', $taskId, \PDO::PARAM_INT);
+    //     $result->execute();
+    //     return $result->fetch();
+    // }
     // Get a subtask for a todo by the subtask id
     public function getSubtaskById($id) 
     {
