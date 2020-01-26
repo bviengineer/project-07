@@ -80,10 +80,6 @@ $app->group('/api/v1/todos', function() use ($app){
             $data = $request->getParsedBody();
             $data['id'] = $args['subtask_id'];
             $result = $this->subtasks->updateSubtask($data);
-            // var_dump($args['id']);
-            //var_dump($args['name']);
-            // var_dump($args['status']);
-            // var_dump($args['task_id']);
             return $response->withJson($result, 201, JSON_PRETTY_PRINT);
         });
         // Delete a todo
