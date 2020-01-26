@@ -49,24 +49,24 @@ class Subtasks
         return $this->getSubtask($this->db->lastInsertId());
         //return ['message' => 'subtask added'];
     }
-    // Update a Todo
-    // public function updateTodo($todo) 
-    // {
-    //     $sqlStmt = 'UPDATE tasks SET task = :task, status = :status WHERE id = :id';
-    //     $result = $this->db->prepare($sqlStmt);
-    //     $result->bindParam(':id', $todo['id'], \PDO::PARAM_INT);
-    //     $result->bindParam(':task', $todo['task'], \PDO::PARAM_STR);
-    //     $result->bindParam(':status', $todo['status'], \PDO::PARAM_INT);
-    //     $result->execute();
-    //     return $this->getTodo($todo['id']);
-    // }
-    // // Delete a Todo
-    // public function deleteTodo($todoId) 
-    // {
-    //     $sqlStmt = 'DELETE FROM tasks WHERE id = :id';
-    //     $result = $this->db->prepare($sqlStmt);
-    //     $result->bindParam(':id', $todoId, \PDO::PARAM_INT);
-    //     $result->execute();
-    //     return ['message' => 'That item has been removed from the list'];
-    // }
+    // Update a subtask based on subtask id
+    public function updateSubtask($subtask) 
+    {
+        $sqlStmt = 'UPDATE subtasks SET name = :name, status = :status, WHERE id = :id';
+        $result = $this->db->prepare($sqlStmt);
+        $result->bindParam(':id', $subtask['id'], \PDO::PARAM_INT);
+        $result->bindParam(':name', $subtask['name'], \PDO::PARAM_STR);
+        $result->bindParam(':status', $subtask['status'], \PDO::PARAM_INT);
+        $result->execute();
+        return $this->getSubtaskById($subtask['id']);
+    }
+    // Delete a subtask
+    public function deleteSubtask($id) 
+    {
+        $sqlStmt = 'DELETE FROM subtasks WHERE id = :id';
+        $result = $this->db->prepare($sqlStmt);
+        $result->bindParam(':id', $id, \PDO::PARAM_INT);
+        $result->execute();
+        return ['message' => 'That item has been removed from the list'];
+    }
 }
