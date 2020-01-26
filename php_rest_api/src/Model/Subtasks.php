@@ -9,7 +9,7 @@ class Subtasks
     {
         $this->db = $database;
     }
-    // Retrieves all Todos
+    // Retrieves all subtasks for a specific todo
     public function getSubtasks($taskId) 
     {
         $sqlStmt = 'SELECT * FROM subtasks WHERE task_id = :taskId ORDER BY id';
@@ -18,12 +18,21 @@ class Subtasks
         $result->execute();
         return $result->fetchAll();
     }
-    // Retrieves a single subtask
+    // Retrieves a single subtask based on task_id which matched the todo id
     public function getSubtask($taskId) 
     {
         $sqlStmt = 'SELECT * FROM subtasks WHERE task_id = :taskId';
         $result = $this->db->prepare($sqlStmt);
         $result->bindParam(':taskId', $taskId, \PDO::PARAM_INT);
+        $result->execute();
+        return $result->fetch();
+    }
+    // Get a subtask for a todo by the subtask id
+    public function getSubtaskById($id) 
+    {
+        $sqlStmt = 'SELECT * FROM subtasks WHERE id = :id';
+        $result = $this->db->prepare($sqlStmt);
+        $result->bindParam(':id', $id, \PDO::PARAM_INT);
         $result->execute();
         return $result->fetch();
     }
