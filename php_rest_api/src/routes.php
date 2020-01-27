@@ -63,7 +63,6 @@ $app->group('/api/v1/todos', function() use ($app){
         // Add a subtask
         $app->post('', function ($request, $response, $args) {    
             $result = $this->subtasks->createSubtask($request->getParsedBody());
-            //NOTE TO SELF: why am I needing to add the subtask id & task_id in order for it to work?
             return $response->withJson($result, 201, JSON_PRETTY_PRINT);
         });
         // View all subtasks for a given todo
@@ -78,7 +77,6 @@ $app->group('/api/v1/todos', function() use ($app){
         });
         // Update a subtask
         $app->put('/{subtask_id}', function ($request, $response, $args) {    
-            // NOTE TO SELF: likewise, b/c task_id and a subtask id are needed in order to add a subtask, why am I needing to add the subtask id & task_id in order for it to work?
             $data = $request->getParsedBody();
             $data['id'] = $args['subtask_id'];
             $result = $this->subtasks->updateSubtask($data);
