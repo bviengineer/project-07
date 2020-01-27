@@ -1,6 +1,7 @@
 <?php
 // Routes
 
+// Root route 
 $app->get('/', function ($request, $response, $args) {
     $endpoints = [
         // Todo endponits
