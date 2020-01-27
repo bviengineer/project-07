@@ -28,6 +28,7 @@ $app->get('/', function ($request, $response, $args) {
     ];
     return $response->withJson($result, 200, JSON_PRETTY_PRINT);
 });
+// Route group 
 $app->group('/api/v1/todos', function() use ($app){
     // List all todos
     $app->get('', function ($request, $response, $args) {    
