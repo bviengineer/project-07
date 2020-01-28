@@ -39,9 +39,9 @@ class Subtasks
     // Create a subtask
     public function createSubtask($subtask) 
     {
-        $sqlStmt = 'INSERT INTO subtasks(id, name, status, task_id) VALUES(:id, :name, :status, :taskId)';
+        $sqlStmt = 'INSERT INTO subtasks(name, status, task_id) VALUES(:name, :status, :taskId)';
         $result = $this->db->prepare($sqlStmt);
-        $result->bindParam(':id', $subtask['id'], \PDO::PARAM_INT);
+        // $result->bindParam(':id', $subtask['id'], \PDO::PARAM_INT);
         $result->bindParam(':name', $subtask['name'], \PDO::PARAM_STR);
         $result->bindParam(':status', $subtask['status'], \PDO::PARAM_INT);
         $result->bindParam(':taskId', $subtask['task_id'], \PDO::PARAM_INT);
