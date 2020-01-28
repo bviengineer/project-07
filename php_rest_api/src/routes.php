@@ -62,8 +62,10 @@ $app->group('/api/v1/todos', function() use ($app){
     // Subtasks route group
     $app->group('/{task_id}/subtasks', function () use ($app){
         // Add a subtask
-        $app->post('', function ($request, $response, $args) {    
-            $result = $this->subtasks->createSubtask($request->getParsedBody());
+        $app->post('', function ($request, $response, $args) {  
+            $data = $request->getParsedBody();
+            $data['task_id'] = $args['task_id']; //added this which I had before
+            $result = $this->subtasks->createSubtask($data);
             return $response->withJson($result, 201, JSON_PRETTY_PRINT);
         });
         // View all subtasks for a given todo
